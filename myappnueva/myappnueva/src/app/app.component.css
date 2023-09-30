@@ -1,0 +1,22 @@
+
+.card{
+  text-align: center;
+width: 400px;
+height: 530px;
+background-color:darkgrey;
+margin: 0px;
+
+  margin-left: 550px;
+
+}
+
+
+.input1{
+text-align: center;
+width: 300px;
+height: 10px;
+background-color: aqua;
+margin-left: 50px;
+border-radius: 100%;
+
+}

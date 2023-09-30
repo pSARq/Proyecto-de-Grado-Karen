@@ -1,0 +1,31 @@
+.form{
+
+
+    margin: 0 auto; /* Esto centrará horizontalmente el formulario */
+    width: 50%; /* Ajusta el ancho del formulario según tu preferencia */
+   background-image: url(https://i.pinimg.com/564x/ea/fe/24/eafe24b1db3ca325c409770f467da4b1.jpg);
+    padding: 20px;
+    opacity: 0.6;
+    height: 50%;
+
+
+
+}
+
+
+.h2{
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+text-align: center;
+color: aliceblue;
+}
+
+
+
+.contenido {
+  margin: 0 auto; /* Esto centrará horizontalmente el contenido */
+  text-align: left; /* Alinea el texto a la izquierda */
+  max-width: max-content;
+  width: 80%; /* Ajusta el ancho a tu preferencia */
+  margin-top: 30px;
+}

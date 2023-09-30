@@ -1,0 +1,195 @@
+
+<div class="grid-container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-white">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeLink === 'inicio'" (click)="showSection('inicio')">Formulario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeLink === 'misSolicitudes'" (click)="showSection('misSolicitudes')">Mis solicitudes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="activeLink === 'otraFuncion'" (click)="showSection('otraFuncion')">Otra función</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div *ngIf="activeLink === 'misSolicitudes'">
+    <h1 class="mat-h1"> MIS SOLICITUDES </h1>
+
+    <div class="grid-container">
+      <br>
+      <div class="grid-container">
+        <br>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="ID o Tipo de Solicitud" [(ngModel)]="filtroBusqueda" />
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="buscarPorID" [(ngModel)]="buscarPorID">
+          <label class="form-check-label" for="buscarPorID">Buscar por ID</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="buscarPorTipo" [(ngModel)]="buscarPorTipo">
+          <label class="form-check-label" for="buscarPorTipo">Buscar por Tipo de Solicitud</label>
+        </div>
+        <!-- Agrega la lista desplegable si "Buscar por Tipo de Solicitud" está seleccionado -->
+        <div *ngIf="buscarPorTipo" class="form-group">
+          <label for="tipoSolicitud">Tipo de Solicitud:</label>
+          <select id="tipoSolicitud" class="form-control" [(ngModel)]="filtroTipoSolicitudSeleccionado">
+            <option value="">Selecciona una opción</option>
+            <option *ngFor="let tipo of tiposSolicitud" [value]="tipo">{{ tipo }}</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" (click)="buscarSolicitudes()">Buscar</button>
+        <!-- Resto de tu código... -->
+
+
+      </div>
+    </div>
+    <mat-card class="card">
+    <mat-grid-tile-footer style="margin-left: -900px;">
+      MI CUENTA
+
+
+    </mat-grid-tile-footer>
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Motivo</th>
+          <th scope="col">Semestre</th>
+
+          <th scope="col">Fecha</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudesFiltradas ">
+          <td>{{solicitud.id }}</td>
+          <td>{{solicitud.nombre}}</td>
+          <td>{{solicitud.motivo}}</td>
+          <td>{{solicitud.semestre}}</td>
+          <td>{{solicitud.fecha}}</td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm" (click)="responderSolicitud(solicitud.id)"><i class="far fa-edit"></i>Editar</button>
+            <button class="eliminar-button" >
+
+              Eliminar
+            </button>
+          </td>
+
+        </tr>
+
+        <button mat-button>Antes</button>
+
+        <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3"
+        aria-label=".form-select-lg example"  id="floatingSelect" [(ngModel)]="page">
+
+          <option value="0">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+
+
+        </select>
+
+        <button mat-button >Despues</button>
+
+
+      </tbody>
+
+
+
+
+
+
+    </table>
+
+    </mat-card>
+
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+<div *ngIf="activeLink === 'otraFuncion'">
+  <h1 class="mat-h1"> MIS SOLICITUDES </h1>
+
+
+  <mat-card class="card">
+  <mat-grid-tile-footer style="margin-left: -900px;">
+    MI CUENTA
+
+
+  </mat-grid-tile-footer>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#id</th>
+        <th scope="col">estado</th>
+
+
+        <th scope="col">respuesta</th>
+        <th scope="col">fecha respuesta</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let  tramite of tramites ">
+        <td>{{tramite.id }}</td>
+        <td>{{tramite.estado }}</td>
+        <td>{{tramite.respuesta }}</td>
+        <td>{{tramite.fechaConsulta }}</td>
+
+        <td>
+          <button class="btn btn-outline-primary btn-sm"><i class="far fa-edit"></i>Editar</button>
+          <button class="eliminar-button" >
+
+            Eliminar
+          </button>
+        </td>
+
+      </tr>
+
+      <button mat-button>Antes</button>
+
+      <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3"
+      aria-label=".form-select-lg example"  id="floatingSelect" [(ngModel)]="page">
+
+        <option value="0">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+
+
+      </select>
+
+      <button mat-button >Despues</button>
+
+
+    </tbody>
+
+
+
+
+
+
+  </table>
+
+  </mat-card>
+
+</div>
+
+
+

@@ -1,0 +1,111 @@
+<div class="grid-container">
+
+  <div class="grid-container">
+
+    <br>
+    <div class="grid-container">
+      <br>
+
+      <div class="grid-container">
+        <h1 class="mat-h1">MIS SOLICITUDES</h1>
+        <br>
+        <div class="grid-container">
+          <br>
+          <div class="grid-container">
+            <br>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="ID o Tipo de Solicitud" [(ngModel)]="filtroBusqueda" />
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="buscarPorID" [(ngModel)]="buscarPorID">
+              <label class="form-check-label" for="buscarPorID">Buscar por ID</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="buscarPorTipo" [(ngModel)]="buscarPorTipo">
+              <label class="form-check-label" for="buscarPorTipo">Buscar por Tipo de Solicitud</label>
+            </div>
+            <!-- Agrega la lista desplegable si "Buscar por Tipo de Solicitud" está seleccionado -->
+            <div *ngIf="buscarPorTipo" class="form-group">
+              <label for="tipoSolicitud">Tipo de Solicitud:</label>
+              <select id="tipoSolicitud" class="form-control" [(ngModel)]="filtroTipoSolicitudSeleccionado">
+                <option value="">Selecciona una opción</option>
+                <option *ngFor="let tipo of tiposSolicitud" [value]="tipo">{{ tipo }}</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" (click)="buscarSolicitudes()">Buscar</button>
+            <!-- Resto de tu código... -->
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Seleccionar fecha" [(ngModel)]="selectedDate">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="buscarPorFecha()">Buscar por Fecha</button>
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Resto de tu código... -->
+    </div>
+
+
+
+
+
+  <br>
+  <mat-card class="card">
+    <mat-grid-tile-footer style="margin-left: -900px;">
+      MI CUENTA
+    </mat-grid-tile-footer>
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Tipo de Solicitud</th>
+          <th scope="col">Semestre</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Mensaje</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitud of solicitudesFiltradas ">
+          <td>{{ solicitud.id }}</td>
+          <td>{{ solicitud.nombre }}</td>
+          <td>{{ solicitud.motivo }}</td>
+          <td>{{ solicitud.semestre }}</td>
+          <td>{{ solicitud.estado }}</td>
+          <td>{{ solicitud.mensaje }}</td>
+          <td>{{ solicitud.fecha }}</td>
+          <td>
+            <button class="btn btn-outline-primary btn-sm" (click)="editarSolicitud(solicitud.id)">
+              <i class="far fa-edit"></i>Editar
+            </button>
+            <button class="eliminar-button">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination">
+      <button mat-button (click)="antePagina()">Antes</button>
+      <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3"
+        aria-label=".form-select-lg example" id="floatingSelect" [(ngModel)]="page">
+        <option value="0">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+      <button mat-button>Después</button>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <!-- Otro contenido aquí si es necesario -->
+  </mat-card>
+</div>

@@ -1,0 +1,87 @@
+<div
+  style="background-image: url(https://img.freepik.com/foto-gratis/vista-lateral-hombre-smartphone_23-2148793481.jpg?t=st=1695625695~exp=1695626295~hmac=c424c11b0100cbeb93d0d075a2f67691f425bf3944bf7c9555b337ab78b9eab8); background-size: cover; background-repeat: no-repeat; width: 100%; height: 100%;">
+  <div>
+
+    <br>
+    <br>
+    <br>
+
+    <mat-card>
+    </mat-card>
+
+    <div class="form">
+      <h2 class="h2"> REGISTRO DE USUARIO UNIAJC</h2>
+      <div class="contenido">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" style="width: 250px; height: 50px;" id="floatingInput"
+            placeholder="name@example.com" [(ngModel)]="usuario.nombre">
+          <label for="floatingInput">Nombre</label>
+        </div>
+
+        <div class="form-floating mb-3" style="margin-left: 270px;">
+          <input type="email" class="form-control" style="margin-top: -65px; width: 250px; height: 50px; "
+            id="floatingInput" placeholder="name@example.com" [(ngModel)]="usuario.email">
+          <label for="floatingInput">Email address</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="password" style="width: 250px; height: 50px; " class="form-control" id="floatingPassword"
+            placeholder="Password" [(ngModel)]="usuario.password">
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="form-floating mb-3" style="margin-left: 260px; margin-left: 270px; margin-top: -50px;">
+          <select style="height: 50px; width: 250px; font-size: 13px;" class="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example" id="floatingSelect" [(ngModel)]="usuario.rol">
+            <option value=2>ESTUDIANTE</option>
+            <option value=3>DIRECTIVO</option>
+          </select>
+
+          <label for="floatingSelect" style="color: black;">ROL</label>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="form-floating mb-3" style=" margin-top: -60px;">
+          <select style="height: 50px; width: 250px; font-size: 13px;" class="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example" id="floatingSelect" [(ngModel)]="usuario.carrera">
+            <option value="Ing Sistemas">Ing Sistemas</option>
+            <option value="Ing Electronica">Ing Electronica</option>
+          </select>
+
+          <label for="floatingSelect" style="color: black;">CARRERA</label>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="form-floating mb-3" style="margin-left: 270px; margin-top: -105px;">
+          <select style="height: 50px; width: 250px; font-size: 13px;" class="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example" id="floatingSelect" [(ngModel)]="usuario.semestre">
+            <option value=2>2</option>
+            <option value=3>3</option>
+          </select>
+
+          <label for="floatingSelect" style="color: black;">SEMESTRE</label>
+        </div>
+
+      </div>
+      <div>
+        <br>
+        <br>
+
+        <div>
+          <button class="btn btn-dark" (click)="realizarRegistro()" style="margin-left: 250px;">REGISTRAR</button>
+        </div>
+
+        <br>
+        <br>
+      </div>
+    </div>
+    <br>
+
+  </div>
+
+</div>

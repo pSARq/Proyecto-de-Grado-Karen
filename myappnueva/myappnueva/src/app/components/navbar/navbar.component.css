@@ -1,0 +1,20 @@
+.modelo1{
+  text-align: center;
+  margin-right: 400px;
+  margin-top: 20px;
+}
+
+
+.mat-sidenav-container{
+  height: calc(205vh - 115vh);
+}
+.mat-sidenav{
+  width: 180px;
+
+  background-color:lightslategrey;
+}
+
+#navbar-fondo{
+  background-color:blueviolet
+
+}

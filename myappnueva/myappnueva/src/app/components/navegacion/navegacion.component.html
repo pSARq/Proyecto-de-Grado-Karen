@@ -1,0 +1,81 @@
+<mat-toolbar style="height: 90px; background-color: rgb(11, 84, 179); ">
+
+  <mat-toolbar-row>
+
+    <a>
+      <img src="https://www.uniajc.edu.co/wp-content/uploads/2021/04/thumbnail_Logo-UNIAJC-blanco-01-300x131.png"
+        alt="" style="margin-top: 10px; width: 200px; height: 60px;" class="d-inline-block align-text-top">
+    </a>
+
+    <button mat-button (click)="prueba()"></button>
+
+    <!-- ... rest of your toolbar content ... -->
+    <div style="margin-left: 800px;">
+      <!-- Use *ngIf to show/hide buttons based on estaLogueado -->
+      <button mat-button routerLink="/login"><mat-icon>person</mat-icon>Login</button>
+      <button mat-button routerLink="/registro"><mat-icon>person_add</mat-icon>Register</button>
+      <!-- Show logout button if the user is logged in -->
+      <button mat-button *ngIf="estaLogueado" (click)="logOut()"><mat-icon>logout</mat-icon>Logout</button>
+
+
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<mat-sidenav-container style="background: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.todofondos.net%2Fdownloads%2F31-fondo-de-pantalla-de-fondo-blanco-fondos-blancos-de-calidad-100-hd-fondo-de-pantalla-blancos%2F&psig=AOvVaw1HWBIeHAex9bCuJlp3GaKE&ust=1681194168164000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKi-hbzWnv4CFQAAAAAdAAAAABAE); opacity: 2;">
+
+  <mat-sidenav *ngIf="isEstudiante" [(opened)]= "opened" mode="side" class="custom-sidenav">
+
+    <mat-nav-list class="p-3 mb-2 bg-transparent text-dark">
+      <a id="userlog" href="#" routerLink="dashboardcita">
+        <img style="border-radius: 50%; margin-top: 15px; width: 120px; height: 120px; background-color: rgb(211, 205, 205); margin-left: 40px;" alt="" class="d-inline-block align-top" src="https://cdn-icons-png.flaticon.com/512/4908/4908415.png">
+      </a>
+      <div *ngFor="let item of data">
+        <p>Email: {{ item.email }}</p>
+        <p>Nombre: {{ item.nombre }}</p>
+      </div>
+
+      <a mat-list-item ><mat-icon style="margin-right: 8px;">account_box</mat-icon>Mi Perfil</a>
+      <a mat-list-item routerLink="/dashboard"><mat-icon style="margin-right: 8px;">home</mat-icon> Inicio</a>
+      <a mat-list-item href="#" routerLink="/adicionar"><mat-icon style="margin-right: 8px;">calendar_today</mat-icon> Calendario</a>
+      <a mat-list-item href="#" style="margin-top: 240px;" (click)="logOut()"><mat-icon>exit_to_app</mat-icon>Salir</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav *ngIf="isDirectivo" [(opened)]="opened" mode="side" class="custom-sidenav">
+
+    <mat-nav-list class="p-3 mb-2 bg-transparent text-dark">
+      <a id="userlog" href="#" routerLink="dashboardcita">
+        <img style="border-radius: 50%; margin-top: 15px; width: 120px; height: 120px; background-color: rgb(211, 205, 205); margin-left: 40px;" alt="" class="d-inline-block align-top" src="https://cdn-icons-png.flaticon.com/512/4908/4908415.png">
+      </a>
+      <div *ngFor="let item of data">
+        <p>Email: {{ item.email }}</p>
+        <p>Nombre: {{ item.nombre }}</p>
+      </div>
+
+
+      <a mat-list-item ><mat-icon style="margin-right: 8px;">account_box</mat-icon>Mi Perfil</a>
+      <a mat-list-item routerLink="/director"><mat-icon style="margin-right: 8px;">home</mat-icon> Inicio</a>
+      <a mat-list-item href="#" routerLink="/adicionar"><mat-icon style="margin-right: 8px;">calendar_today</mat-icon> Calendario</a>
+      <a mat-list-item href="#" style="margin-top: 240px;" (click)="logOut()"><mat-icon>logout</mat-icon>SALIR</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<div style="width: 500px; margin-left: 500px; margin-top: 15px; position: absolute;">
+  <a class="navbar-brand">
+    <a>
+      <button mat-button (click)="opened=!opened"><img id="efectoboton" style="width: 100px; margin-top: -300px; margin-left: 700px;" src="https://cdn-icons-png.flaticon.com/128/8106/8106949.png"></button>
+    </a>
+  </a>
+</div>

@@ -1,0 +1,7 @@
+Creacion usuario
+login
+Asignaciones de rol
+creacion de transmite (creacion de solicitudes, Ya tiene la notificacion)
+consulta de transmite (Estado del transmite, respuesta director, info solicitud)
+
+CAMBIAR CORREO DE NOTIFICACION EN BACK

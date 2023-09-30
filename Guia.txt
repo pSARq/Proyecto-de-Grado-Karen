@@ -1,0 +1,3 @@
+Frontend myappnueva lo descomprimes y abres el comando inicialo con npm start
+Backend lo mismo lo inicias con node app.js
+la base de datos bd2 vas xampp ve al localhost mysql y creas una base de datos llamada bd2 y despues le das importar al archivo bd2

@@ -1,0 +1,24 @@
+
+/* Estilos para los enlaces de la barra de navegación */
+.navbar-dark .navbar-nav .nav-link {
+  color: #1518dd; /* Color del texto */
+  transition: background-color 0.3s, color 0.3s; /* Animación de transición suave */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  background-color: #007bff; /* Color de fondo al pasar el mouse por encima */
+  color: #f3f3f3; /* Color del texto al pasar el mouse por encima */
+  text-decoration: none; /* Quitar subrayado al pasar el mouse por encima */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse por encima */
+}
+
+/* Estilos para el botón activo */
+.navbar-dark .navbar-nav .nav-link.active {
+  background-color: #007bff; /* Color de fondo del botón activo */
+}
+
+
+
+#mat-form-field{
+  background-color: #fff;
+}

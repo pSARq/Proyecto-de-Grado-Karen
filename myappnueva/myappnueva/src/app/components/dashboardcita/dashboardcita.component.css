@@ -1,0 +1,53 @@
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+/* Estilos para los enlaces de la barra de navegación */
+.navbar-dark .navbar-nav .nav-link {
+  color: #1518dd; /* Color del texto */
+  transition: background-color 0.3s, color 0.3s; /* Animación de transición suave */
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  background-color: #007bff; /* Color de fondo al pasar el mouse por encima */
+  color: #f3f3f3; /* Color del texto al pasar el mouse por encima */
+  text-decoration: none; /* Quitar subrayado al pasar el mouse por encima */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse por encima */
+}
+
+/* Estilos para el botón activo */
+.navbar-dark .navbar-nav .nav-link.active {
+  background-color: #007bff; /* Color de fondo del botón activo */
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}
+
+.card{
+  text-align: center;
+width: 1000px;
+height: 400px;
+background-color:white;
+margin: 0px;
+
+  margin-left: 10px;
+
+}
+
+#mat-form-field{
+  background-color: #fff;
+}

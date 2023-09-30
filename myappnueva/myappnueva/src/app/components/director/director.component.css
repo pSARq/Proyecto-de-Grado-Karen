@@ -1,0 +1,239 @@
+@keyframes absorption {
+  0% {
+    background-position: center bottom; /* Inicio del fondo en la parte inferior */
+  }
+  100% {
+    background-position: center top; /* Fondo en la parte superior */
+  }
+}
+
+.grid-container {
+  top: -200px;
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 130vh;
+  background-image: url(https://img.freepik.com/vector-gratis/borde-curvo-azul-sobre-fondo-simple_53876-115364.jpg?w=740&t=st=1695749184~exp=1695749784~hmac=88f96d3e1f1da42607dfe075473f874d5569ca65b18f225edf6307749bb793f1);
+
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con 50% de opacidad */
+ /* animation: absorption 4s linear infinite; /* Animación de absorción constante */
+}
+
+.grid-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Altura de la parte superior con efecto constante */
+  background-color: rgba(53, 33, 226, 0.808); /* Color azul para simular la parte constante */
+}
+
+
+
+  .dashboard-card {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+
+  .dashboard-card-content {
+    text-align: center;
+  }
+
+
+  .micard{
+    text-align: center;
+  width: 400px;
+  height: 530px;
+  background-color:beige;
+  margin: 0px;
+
+    margin-left: 40px;
+
+  }
+
+
+
+
+
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background:#fff;
+    min-height: 100vh;
+  }
+
+  section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+  }
+
+.container {
+  /* ... Tus estilos existentes ... */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Espacio entre los cards */
+}
+
+.container .card {
+  /* ... Tus estilos existentes ... */
+ /* animation: float 5s infinite alternate; /* Animación para hacer flotar los cards */
+}
+
+
+
+  .container {
+
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+    margin-top: 150px;
+  margin-left: 100px;
+
+
+
+
+
+  gap: 20px; /* Espacio entre los cards */
+  }
+
+
+  .container .card {
+    /* ... Tus estilos existentes ... */
+    position: relative;
+    width: 300px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+  top:70px;
+    animation:  float 2s infinite alternate; /* Animación para hacer flotar los cards */
+  }
+
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(70px);
+    }
+  }
+
+  .container .card .content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.5s;
+  }
+
+  .container .card:hover .content {
+    transform: translateY(-20px);
+  }
+
+  .container .card .content .imgBx {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+  }
+
+  .container .card .content .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .container .card .content .contentBx h3 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+    margin: 20px 0 10px;
+    line-height: 1.1em;
+  }
+
+  .container .card .content .contentBx h3 span {
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: initial;
+  }
+
+  .container .card .sci {
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+  }
+
+  .container .card .sci li {
+    list-style: none;
+    margin: 0 10px;
+    transform: translateY(40px);
+    transition: 0.5s;
+    opacity: 0;
+  }
+
+  .container .card:hover .sci li {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  .container .card .sci li a {
+    color: #fff;
+    font-size: 20px;
+  }
+
+  #zoom {
+    transition: transform .1.5s;
+  }
+
+  #zoom:hover {
+    transform: scale(1.2);
+  }
+
+  #zoom:hover {
+    transform: scale(1.2);
+  }
+
+  #zoom {
+    transition: transform .1.5s;
+  }

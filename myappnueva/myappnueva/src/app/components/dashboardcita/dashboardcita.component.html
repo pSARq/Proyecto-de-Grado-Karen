@@ -1,0 +1,174 @@
+
+<div style="background-image: url(https://img.freepik.com/psd-gratis/bordes-abstractos-degradados_23-2150602089.jpg?w=740&t=st=1695648534~exp=1695649134~hmac=7d735c9b8ce03909003c7b0bbc391ee263ec7fff11c3340cc4670d3633cf5897);background-size: cover; background-repeat: no-repeat; width: 100%; height: 100%;">
+
+
+
+    <!-- Barra de navegación mejorada -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-white">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeLink === 'inicio'" (click)="showSection('inicio')">Formulario</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeLink === 'misSolicitudes'" (click)="showSection('misSolicitudes')">Mis solicitudes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeLink === 'otraFuncion'" (click)="showSection('otraFuncion')">Otra función</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contenido de las secciones -->
+    <div *ngIf="activeLink === 'inicio'">
+      <!-- Contenido para la sección Inicio -->
+      <!-- Contenido para la sección Inicio -->
+<mat-card style="background: none; max-width: max-content; margin: auto; margin-top: 30px; opacity: 0.7;">
+<br /><br />
+  <mat-card-title style="text-align: center; color: black;">
+    FORMULARIO DE SOLICITUD
+  </mat-card-title>
+  <br />
+  <div class="form" style="margin-left: 30px;">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" style="width: 250px; height: 50px;" id="floatingInput" placeholder="name@example.com" [(ngModel)]="formcita.nombre">
+      <label for="floatingInput">Nombre</label>
+    </div>
+
+    <div class="form-floating mb-3" style="margin-left: 260px; margin-top: -65px; width: 150px;">
+      <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="floatingSelectSemestre" [(ngModel)]="formcita.semestre">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+      </select>
+      <label for="floatingSelectSemestre" style="color: black;">Semestre</label>
+    </div>
+
+    <div class="form-floating" style="margin-left: 420px; margin-top: -65px; width: 248px;">
+      <select class="form-select" id="floatingSelectDirector" aria-label="Floating label select example" style="height: 50px; font-size: 13px;" >
+        <option value="Javier Cortes Carvajal">Javier Cortes Carvajal</option>
+        <!-- Agrega más opciones de estudiantes si es necesario -->
+      </select>
+      <label for="floatingSelectDirector">Director</label>
+    </div>
+
+    <div class="form-floating" style="margin-left: 0px; margin-top: 20px; width: 248px;">
+      <select class="form-select" id="floatingSelectTipoSolicitud" aria-label="Floating label select example" style="height: 50px; font-size: 13px;" [(ngModel)]="formcita.motivo">
+        <option value="Agendar Cita">Agendar Cita</option>
+        <option value="Adicionar Asignatura">Adicionar Asignatura</option>
+        <option value="Cancelar Asignatura">Cancelar Asignatura</option>
+
+        <!-- Agrega más opciones de tipo de solicitud si es necesario -->
+      </select>
+      <label for="floatingSelectTipoSolicitud">Tipo de Solicitud</label>
+    </div>
+
+    <div class="form-floating">
+      <div class="form-floating">
+        <textarea style="width: 668px; height: 100px; margin-top: 50px;" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" [(ngModel)]="formcita.mensaje"></textarea>
+        <label for="floatingTextarea2">Comentarios</label>
+      </div>
+    </div>
+
+    <br />
+    <br />
+
+    <div>
+      <button class="btn btn-dark" (click)="Regist()">ENVIAR</button>
+      <!-- Aquí se agregó el evento click para llamar al método registrarDatos() al hacer clic -->
+
+      <br />
+
+    </div>
+
+    <br />
+  </div>
+</mat-card>
+
+
+    </div>
+
+    <div  *ngIf="activeLink === 'misSolicitudes'">
+      <mat-card>
+        <app-registrocitas></app-registrocitas>
+      </mat-card>
+    </div>
+
+    <div *ngIf="activeLink === 'otraFuncion'">
+      <!-- Contenido para la sección Otra función -->
+
+
+
+        <mat-card class="card">
+          <mat-grid-tile-footer style="margin-left: -900px;">
+            MI CUENTA
+
+
+          </mat-grid-tile-footer>
+
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">consulta_id</th>
+      <th scope="col">Respuesta</th>
+      <th scope="col">Semestre</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Fecha</th>
+
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let solicitud  of solicitudes ">
+      <td>{{solicitud.id}}</td>
+      <td>{{solicitud.consulta_id}}</td>
+      <td>{{solicitud.respuesta}}</td>
+      <td>
+        <button class="btn btn-outline-primary btn-sm" ><i class="far fa-edit"></i>Editar</button>
+        <button class="eliminar-button" >
+
+          Eliminar
+        </button>
+      </td>
+
+    </tr>
+
+    <button mat-button>Antes</button>
+
+    <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3"
+    aria-label=".form-select-lg example"  id="floatingSelect" >
+
+      <option value="0">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+
+
+    </select>
+
+    <button mat-button >Despues</button>
+
+
+  </tbody>
+
+
+
+
+
+
+</table>
+
+          </mat-card>
+
+          <mat-card>
+
+      </mat-card>
+    </div>
+  </div>

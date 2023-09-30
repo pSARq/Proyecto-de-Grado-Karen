@@ -1,0 +1,61 @@
+
+.mat-sidenav-container{
+  height: calc(205vh - 115vh);
+  margin-top: -8px;
+
+}
+.mat-sidenav{
+  width: 230px;
+
+  background-color:rgb(40, 68, 68)
+
+}
+
+
+
+#userlog{
+color: black;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+#efectoboton {
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  0% {
+    transition: transform .1.5s;
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+  100%{ transition: transform .1.5s;}
+}
+
+.custom-sidenav {
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.custom-sidenav mat-nav-list {
+  padding-top: 20px;
+}
+
+.custom-sidenav mat-list-item {
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.custom-sidenav mat-list-item:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+.custom-sidenav {
+  max-width: 250px;
+}
