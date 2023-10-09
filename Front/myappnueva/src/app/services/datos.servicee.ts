@@ -14,6 +14,17 @@ export class DatosService {
   userData$ = this.userDataSubject.asObservable();
   private idEstudiante: string = '';
   private idDirectivo: string = "";
+  private idEstudianteKey = 'idEstudiante';
+  private idDirectivoKey = 'idDirectivo';
+  consultaExitosa: boolean = false;
+  datosConsulta: any = {};
+  private roleKey = 'role';
+  private tokenKey = 'token';
+  usuario = {
+    email: '',
+    password: '',
+    id: 0
+  }
 
   url = 'http://localhost:3000/api/login';
   url2 = 'http://192.168.43.143:3000/api';
@@ -29,21 +40,6 @@ export class DatosService {
 
 
   constructor(private http: HttpClient) { }
-
-  usuario = {
-    email: '',
-    password: '',
-    id: 0
-  }
-
-  private idEstudianteKey = 'idEstudiante';
-  private idDirectivoKey = 'idDirectivo';
-
-  consultaExitosa: boolean = false;
-  datosConsulta: any = {};
-  private roleKey = 'role';
-  private tokenKey = 'token';
-
 
   refreshToken(): Observable<any> {
     const currentToken = this.getToken();
@@ -106,8 +102,6 @@ export class DatosService {
           this.usuario.email = decodedToken.email;
           this.usuario.id = decodedToken.id; // Actualiza a id_estudiante
           this.setIdEstudiante(response.id); // Almacena el ID del estudiante
-
-
         } else {
           this.usuario.email = response.email;
         }
@@ -126,7 +120,6 @@ export class DatosService {
   }
 
   verifyToken(email: string): Observable<any> {
-
     const currentToken = this.getToken();
 
     if (!currentToken) {
@@ -141,7 +134,6 @@ export class DatosService {
 
     return this.http.post(`${this.url2}/verify-token`, { email, currentToken }, { headers });
   }
-
 
   getIdEstudiante(): string {
     if (!this.idEstudiante) {
@@ -163,11 +155,10 @@ export class DatosService {
     }
     return this.idDirectivo;
   }
+
   setRole(role: string): void {
     localStorage.setItem(this.roleKey, role);
   }
-
-
 
   // Servicio
   mostrarSolicitudes(): Observable<any> {
@@ -202,9 +193,6 @@ export class DatosService {
     return this.http.get(`${this.url6}/tablaConsulta`, { headers });
   }
 
-
-
-
   registrarSolicitud(solicitud: any): Observable<any> {
     const currentToken = this.getToken();
 
@@ -224,8 +212,6 @@ export class DatosService {
   }
 
   // Resto del código del servicio
-
-
   setTokenAndRole(token: string, role: string): void {
     localStorage.setItem(this.tokenKey, token);
     localStorage.setItem(this.roleKey, role);
@@ -234,6 +220,7 @@ export class DatosService {
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
+
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
@@ -241,8 +228,6 @@ export class DatosService {
   getRole(): string | null {
     return localStorage.getItem(this.roleKey);
   }
-
-
 
   clearStorage(): void {
     localStorage.removeItem(this.tokenKey);
@@ -272,13 +257,7 @@ export class DatosService {
       })
     );
   }
-
-  //
-
-
-
-
-  //
+  
   recuperarSolicitudes(idEstudiante: string): Observable<any> {
     // Obtén el token del almacenamiento local (localStorage)
     const currentToken = this.getToken();
@@ -292,8 +271,6 @@ export class DatosService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${currentToken}`
     });
-
-
 
     // Realiza la petición GET a la URL correspondiente, incluyendo el idEstudiante en la URL
     return this.http.get(`${this.url4}consultaSolicitud/${idEstudiante}`, { headers });
@@ -340,8 +317,6 @@ export class DatosService {
       Authorization: `Bearer ${currentToken}`
     });
 
-
-
     // Realiza la petición GET a la URL correspondiente, incluyendo el idEstudiante en la URL
     return this.http.get(`${this.url4}consulta/${idEstudiante}`, { headers });
   }
@@ -367,10 +342,9 @@ export class DatosService {
     // Combine the observables using forkJoin
     return forkJoin({
       solicitudes: this.recuperarSolicitudes(idEstudiante),
-
-
     });
   }
+
   recuperarEstado(id: any, consulta_id: any): Observable<any> {
     // Obtén el token del almacenamiento local (localStorage)
     const currentToken = this.getToken();
@@ -385,13 +359,9 @@ export class DatosService {
       Authorization: `Bearer ${currentToken}`
     });
 
-
-
     // Realiza la petición GET a la URL correspondiente, incluyendo el idEstudiante en la URL
     return this.http.get(`${this.url4}consultaEstados/${id}/${consulta_id}`, { headers });
   }
-
-
 
   insertarConsulta(consultaData: any): Observable<any> {
     const url = `${this.url5}/insertarConsulta`;
@@ -423,8 +393,6 @@ export class DatosService {
     );
   }
 
-
-
   alta(registrouser: any) {
     return this.http.post(`${this.url}alta.php`, JSON.stringify(registrouser));
   }
@@ -434,18 +402,13 @@ export class DatosService {
   }
 
   baja(email: string) {
-
-
     const urlConFiltro = `${this.url}baja.php?email=${email}`;
     return this.http.get(urlConFiltro);
-
   }
 
   seleccionar(codigo: number) {
     return this.http.get(`${this.url}seleccionar.php?codigo=${codigo}`);
   }
-
-
 
   modificacion(articulo: any) {
     return this.http.post(`${this.url}modificacion.php`, JSON.stringify(articulo));
