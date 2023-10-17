@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AppComponent } from './app.component';
 import { AdicionarComponent } from './components/adicionar/adicionar.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MenuComponent } from './components/menu/menu.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { NavegacionComponent } from './components/navegacion/navegacion.component';
@@ -11,9 +8,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DashboardcitaComponent } from './components/dashboardcita/dashboardcita.component';
 import { RegistroComponent } from './components/login/registro/registro.component';
 import { RegistrocitasComponent } from './components/dashboardcita/registrocitas/registrocitas.component';
-import AdminGuard from './guards/admin.guard';
-import DirectivoGuard from './guards/directivo.guard';
-import { EstudianteGuard } from './guards/estudiante.guard';
 import { DirectorComponent } from './components/director/director.component';
 import { RegistrosolictudesComponent } from './components/director/registrosolictudes/registrosolictudes.component';
 
@@ -38,40 +32,46 @@ const routes: Routes = [
 */
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  {
+    path: '',
+    redirectTo: '/',
+    pathMatch: 'full'
+  },
   {
     path: 'dashboard',
-    component: DashboardComponent,
-   // Aplica el guard de admin
+    component: DashboardComponent
   },
-  {path: 'navegacion', component: NavegacionComponent},
+  {
+    path: 'navegacion',
+    component: NavegacionComponent
+  },
   {
     path: 'registrocitas',
-    component: RegistrocitasComponent,
-
+    component: RegistrocitasComponent
   },
   {
     path: 'director',
-    component: DirectorComponent,
-
+    component: DirectorComponent
   },
-
-  { path: 'director/registrosolicitudes', component: RegistrosolictudesComponent },
+  {
+    path: 'director/registrosolicitudes',
+    component: RegistrosolictudesComponent
+  },
   {
     path: 'dashboardcita',
-    component: DashboardcitaComponent,
-
+    component: DashboardcitaComponent
   },
-
-
-  { path: 'login', component: LoginComponent },
-  { path: 'registro', component: RegistroComponent },
-
-
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'registro',
+    component: RegistroComponent
+  },
   {
     path: 'adicionar',
-    component: AdicionarComponent,
-     // Aplica el guard de admin
+    component: AdicionarComponent
   },
 ];
 

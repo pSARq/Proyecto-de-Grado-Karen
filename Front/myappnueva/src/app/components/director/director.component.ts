@@ -4,16 +4,18 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 import { DatosService } from 'src/app/services/datos.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-director',
   templateUrl: './director.component.html',
   styleUrls: ['./director.component.css']
 })
-export class DirectorComponent implements OnInit{
+export class DirectorComponent implements OnInit {
 
-  constructor(private breakpointObserver: BreakpointObserver,private user: UserService, private datos:DatosService, private route: ActivatedRoute,) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+    private user: UserService,
+    private datos: DatosService
+  ) { }
 
   estaLogueado: boolean = this.datos.consultaExitosa;
 
@@ -30,17 +32,13 @@ export class DirectorComponent implements OnInit{
         this.data.push(result);
       }
     });
-
   }
-
 
   userLogged = this.user.getUserLogged();
 
-  opened=false;
+  opened = false;
 
-   isUserLoggedIn = this.datos.isUserLoggedIn()
-
-
+  isUserLoggedIn = this.datos.isUserLoggedIn()
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -48,21 +46,16 @@ export class DirectorComponent implements OnInit{
       shareReplay()
     );
 
+  logOut() { }
 
 
-
-  logOut(){
-
-  }
-
-
-  prueba(){
-   alert(this.isUserLoggedIn);
-
+  prueba() {
+    alert(this.isUserLoggedIn);
   }
 
 }
-export interface Result{id:string,email:string,nombre:string}
+
+export interface Result { id: string, email: string, nombre: string }
 
 
 

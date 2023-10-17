@@ -1,81 +1,65 @@
-<div style="background-image: url(https://ucontinental.edu.pe/innovacionpedagogica/wp-content/uploads/2022/03/Captura-de-pantalla-2022-03-04-151437-1272x636.png); background-size: cover; background-repeat: no-repeat; width: 100%; height: 600px;">
+<div
+  style="background-image: url(https://ucontinental.edu.pe/innovacionpedagogica/wp-content/uploads/2022/03/Captura-de-pantalla-2022-03-04-151437-1272x636.png); background-size: cover; background-repeat: no-repeat; width: 100%; height: 600px;">
 
-   <mat-card-content class="container">
-    <div  class="card2" >
+  <mat-card-content class="container">
+    <div class="card2">
 
       <mat-card class="card">
-        <br> <br>
+        <br>
+        <br>
+
         <mat-card-title style="color: rgb(0, 0, 0); font-size: 30px;">
           LOGIN
-          </mat-card-title>
-          <br>
-    <div class="input1">
-      <div class="form-floating mb-3">
-        <input style="height: 50px;" type="email" class="form-control" id="floatingInput" placeholder="name@example.com"   [(ngModel)]= "Filtro">
-          <label for="floatingInput">Email address</label>
+        </mat-card-title>
 
+        <br>
 
+        <div class="input1">
+          <div class="form-floating mb-3">
+            <input style="height: 50px;" type="email" class="form-control" id="floatingInput"
+              placeholder="name@example.com" [(ngModel)]="usuario.correo">
+            <label for="floatingInput">Email address</label>
+          </div>
 
-
-        </div>
-
-          <div  class="form-floating">
-
-            <input style="height: 50px; margin-top: -10px;" type="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="Filtro2">
+          <div class="form-floating">
+            <input style="height: 50px; margin-top: -10px;" type="password" class="form-control" id="floatingPassword"
+              placeholder="Password" [(ngModel)]="usuario.password">
             <label for="floatingPassword">Password</label>
+          </div>
+
+          <!-- <div class="form-floating mb-3" style="margin-left: 260px; margin-top: -65px; width: 150px;" style="margin-top:10px">
+            <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <option value="1">ESTUDIANTE</option>
+              <option value="2">DIRECTIVO</option>
+            </select>
+
+            <label for="floatingSelect" style="color: black;">ROL</label>
+          </div> -->
+
+          <div>
+            <br>
+
+            <button style="width: 300px; height: 40px;" class="btn btn-dark" (click)="login()">INGRESAR</button>
+            
+            <br>
+
+            <button style="width: 300px; height: 40px; margin-top: 5px;" class="btn btn-danger" (click)="loginGoogle()" routerLink="/dashboard">INGRESAR CON GOOGLE</button>
+
+            <br>
+            <br>
+            <br>
+            <br>
+          </div>
+
         </div>
 
-
-        <div class="form-floating mb-3" style="margin-left: 260px; margin-top: -65px; width: 150px; "  style="margin-top:10px">
-          <select style="height: 50px; font-size: 13px;" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-
-
-            <option value="1">ESTUDIANTE</option>
-            <option value="2">DIRECTIVO</option>
-
-
-
-          </select>
-
-          <label for="floatingSelect" style="color: black;">ROL</label>
-
-
-       </div>
-
-        <div>
-          <br>
-          <button style="width: 300px;
-          height: 40px;" class="btn btn-dark" (click)="login()" >INGRESAR</button>
-          <br>
-          <button style="width: 300px;
-          height: 40px; margin-top: 5px;" class="btn btn-danger" (click)="loginGoogle()"    routerLink="/dashboard"
-          >INGRESAR CON GOOGLE</button>
         <br>
-    <br>
-
-
-
-        <br>
-
-
-
-    <br>
-
-
-      </div>
-
-
-
-
-    </div>
-    <br>
-
       </mat-card>
 
     </div>
 
-   </mat-card-content>
+  </mat-card-content>
 
 
 
-  </div>
+</div>
