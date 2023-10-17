@@ -35,7 +35,6 @@ export class AuthService {
   }
 
   async create(dto: NuevoUsuarioDto): Promise<any> {
-    debugger
     const { nombre, rol } = dto;
     const exists = await this.authRepository.findOne({ where: [{ nombre: nombre }] });
     if (exists) throw new BadRequestException(new MessageDto('ese usuario ya existe'));
@@ -48,10 +47,10 @@ export class AuthService {
   }
 
   async login(dto: LoginUsuarioDto): Promise<any> {
-    const { nombreUsuario } = dto;
-    const usuario = await this.authRepository.findOne({ where: [{ nombreUsuario: nombreUsuario }, { correo: nombreUsuario }] });
+    const { correo, password } = dto;
+    const usuario = await this.authRepository.findOne({ where: [{ correo: correo }] });
     if (!usuario) return new UnauthorizedException(new MessageDto('no existe el usuario'));
-    const passwordOK = await compare(dto.password, usuario.password);
+    const passwordOK = await compare(password, usuario.password);
     if (!passwordOK) return new UnauthorizedException(new MessageDto('contraseña errónea'));
     const payload: PayloadInterface = {
       id: usuario.id,

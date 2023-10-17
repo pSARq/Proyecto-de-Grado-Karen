@@ -18,7 +18,6 @@ export class AuthController {
     @UsePipes(new ValidationPipe({ whitelist: true }))
     @Post('nuevo')
     create(@Body() dto: NuevoUsuarioDto) {
-        debugger
         return this.authService.create(dto);
     }
 
