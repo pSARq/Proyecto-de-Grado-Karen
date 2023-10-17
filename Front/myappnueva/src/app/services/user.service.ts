@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { DatosService } from './datos.service';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 
 @Injectable({
@@ -12,7 +9,7 @@ import { AngularFireFunctions } from '@angular/fire/compat/functions';
 export class UserService {
   usuarios: any
 
-  constructor(private auth: AngularFireAuth, private firestore: AngularFirestore, private dato: DatosService, private functions: AngularFireFunctions) {}
+  constructor(private auth: AngularFireAuth, private functions: AngularFireFunctions) {}
 
   async register(email: string, password: string): Promise<any> {
     try {
@@ -77,7 +74,6 @@ export class UserService {
 
   getUserLogged() {
     return this.auth.authState;
-
   }
 
   logOut() {

@@ -3,6 +3,7 @@ import { DatosService } from 'src/app/services/datos.service';
 import { FirestoreserviceService } from 'src/app/services/servicefirestore/firestoreservice.service';
 import { UserService } from 'src/app/services/user.service';
 import { EmailVerificationService } from 'src/app/services/email-verification.service';
+import { NuevoUsuarioDto } from 'src/app/models/NuevoUsuarioDto';
 
 @Component({
   selector: 'app-registro',
@@ -13,62 +14,17 @@ import { EmailVerificationService } from 'src/app/services/email-verification.se
 export class RegistroComponent implements OnInit {
   selectUser = "";
   Filtro = ""
-  usuario = {
-    nombre: '',
-    email: '',
-    password: '',
-    rol: null,
-    carrera: null,
-    semestre: null
-  }
 
-  constructor(private firestore: FirestoreserviceService, private user: UserService, private datos: DatosService, private emails: EmailVerificationService) { }
+  usuario: NuevoUsuarioDto = new NuevoUsuarioDto;
+
+  constructor(private user: UserService, private datos: DatosService) { }
 
   ngOnInit(): void { }
 
-  asignarRol() { }
-
-  ejecutarMetodos() {
-    const promesa1 = Promise.resolve(this.altaDos());
-    const promesa2 = Promise.resolve(this.Registrarcorreo());
-
-    Promise.all([promesa1, promesa2])
-      .then(() => {
-        console.log('Ambos métodos se ejecutaron al mismo tiempo');
-      })
-      .catch(error => {
-        console.error('Error al ejecutar los métodos:', error);
-      });
-  }
-
-  Registrar() {
-    this.firestore.crearRegistro(this.usuario).then((_res => {
-      alert("Registrado")
-    })).catch(error => {
-      alert("Error" + error)
-    });
-
-    this.datos.alta(this.usuario).subscribe(res => alert("exitoso"))
-  }
-
-  async Registrarcorreo() {
-    const { email, password } = this.usuario;
-
-    try {
-      // Llama al método registerUser del servicio
-      await this.emails.registerUser({ email, password });
-      alert('Usuario registrado con éxito. Se ha enviado un correo de confirmación.');
-    } catch (error) {
-      console.error('Error al registrar el usuario:', error);
-      alert('Error al registrar el usuario: ' + error);
-    }
-  }
-
-
   registroGmail() {
-    const { email, password } = this.usuario;
+    const { correo, password } = this.usuario;
 
-    return this.user.register(email, password)
+    return this.user.register(correo, password)
       .then(user => {
         console.log('Usuario registrado:', user);
         // Puedes agregar más lógica aquí después de registrar al usuario
@@ -78,20 +34,6 @@ export class RegistroComponent implements OnInit {
         console.error('Error al registrar el usuario:', error);
         throw error; // Rechaza la promesa si hay un error
       });
-  }
-
-  async realizarRegistro() {
-    try {
-      const user = await this.registroGmail();
-      if (user) {
-        console.log('Usuario registrado correctamente en Gmail. Realizando registro en MySQL...');
-        await this.registroMysql(); // Llama a registroMysql si el usuario se registró correctamente en Gmail
-      } else {
-        console.log('No se pudo registrar el usuario en Gmail.');
-      }
-    } catch (error) {
-      console.error('Error al realizar el registro:', error);
-    }
   }
 
   registroMysql() {
@@ -109,27 +51,79 @@ export class RegistroComponent implements OnInit {
       );
   }
 
-  altaDos() {
-    this.datos.alta(this.usuario).subscribe(
-      (response: any) => {
-        if (response.resultado === 'OK') {
-          alert(response.mensaje);
-          this.usuario = {
-            nombre: '',
-            email: '',
-            password: '',
-            rol: null,
-            semestre: null,
-            carrera: null
-          }
-        }
-      },
-      error => {
-        console.error('Error en la solicitud:', error);
-        // Manejar el error aquí
+  async realizarRegistro() {
+    try {
+      const user = await this.registroGmail();
+      if (user) {
+        console.log('Usuario registrado correctamente en Gmail. Realizando registro en MySQL...');
+        await this.registroMysql(); // Llama a registroMysql si el usuario se registró correctamente en Gmail
+      } else {
+        console.log('No se pudo registrar el usuario en Gmail.');
       }
-    );
+    } catch (error) {
+      console.error('Error al realizar el registro:', error);
+    }
   }
+
+  // asignarRol() { }
+
+  // ejecutarMetodos() {
+  //   const promesa1 = Promise.resolve(this.altaDos());
+  //   const promesa2 = Promise.resolve(this.Registrarcorreo());
+
+  //   Promise.all([promesa1, promesa2])
+  //     .then(() => {
+  //       console.log('Ambos métodos se ejecutaron al mismo tiempo');
+  //     })
+  //     .catch(error => {
+  //       console.error('Error al ejecutar los métodos:', error);
+  //     });
+  // }
+
+  // Registrar() {
+  //   this.firestore.crearRegistro(this.usuario).then((_res => {
+  //     alert("Registrado")
+  //   })).catch(error => {
+  //     alert("Error" + error)
+  //   });
+
+  //   this.datos.alta(this.usuario).subscribe(res => alert("exitoso"))
+  // }
+
+  // async Registrarcorreo() {
+  //   const { email, password } = this.usuario;
+
+  //   try {
+  //     // Llama al método registerUser del servicio
+  //     await this.emails.registerUser({ email, password });
+  //     alert('Usuario registrado con éxito. Se ha enviado un correo de confirmación.');
+  //   } catch (error) {
+  //     console.error('Error al registrar el usuario:', error);
+  //     alert('Error al registrar el usuario: ' + error);
+  //   }
+  // }
+
+  // altaDos() {
+  //   this.datos.alta(this.usuario).subscribe(
+  //     (response: any) => {
+  //       if (response.resultado === 'OK') {
+  //         alert(response.mensaje);
+  //         this.usuario = {
+  //           nombre: '',
+  //           email: '',
+  //           password: '',
+  //           rol: null,
+  //           semestre: null,
+  //           carrera: null
+  //         }
+  //       }
+  //     },
+  //     error => {
+  //       console.error('Error en la solicitud:', error);
+  //       // Manejar el error aquí
+  //     }
+  //   );
+  // }
 
 }
 

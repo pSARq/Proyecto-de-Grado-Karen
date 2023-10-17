@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, forkJoin, of, throwError } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { catchError, tap } from 'rxjs/operators';
+import { NuevoUsuarioDto } from '../models/NuevoUsuarioDto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,14 @@ export class DatosService {
   datosConsulta: any = {};
   private roleKey = 'role';
   private tokenKey = 'token';
+
   usuario = {
     email: '',
     password: '',
     id: 0
   }
 
-  urlBase = 'http://localhost:3000/api'
+  urlBase = 'http://localhost:3000'
   // url = 'http://localhost:3000/api/login';
   // url2 = 'http://localhost:3000/api';
   // url3 = "http://localhost:3000/api/solicitudes";
@@ -37,9 +39,15 @@ export class DatosService {
   private refreshTokenEndpoint = 'http://localhost:3000/api/refresh-token';
   // disponer url de su servidor que tiene las páginas PHP
 
-
-
   constructor(private http: HttpClient) { }
+
+  registerUser(userData: NuevoUsuarioDto): Observable<any> {
+    return this.http.post<any>(`${this.urlBase}/auth/nuevo`, userData);
+  }
+
+  // registerUser(userData: any): Observable<any> {
+  //   return this.http.post<any>(`${this.urlBase}/register`, userData);
+  // }
 
   refreshToken(): Observable<any> {
     const currentToken = this.getToken();
@@ -74,10 +82,6 @@ export class DatosService {
     const token = localStorage.getItem(this.tokenKey);
     // Si el token existe y no está expirado, el usuario está logueado
     return token && !this.jwtHelper.isTokenExpired(token);
-  }
-
-  registerUser(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.urlBase}/register`, userData);
   }
 
   registerUserWithGmail(email: string) {

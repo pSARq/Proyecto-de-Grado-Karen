@@ -1,4 +1,3 @@
-import { AuthRepository } from './auth.repository';
 import { TokenDto } from './dto/token.dto';
 import { Body, Controller, Get, Post, UsePipes, ValidationPipe, Param } from '@nestjs/common';
 import { AuthService } from './auth.service';
@@ -19,6 +18,7 @@ export class AuthController {
     @UsePipes(new ValidationPipe({ whitelist: true }))
     @Post('nuevo')
     create(@Body() dto: NuevoUsuarioDto) {
+        debugger
         return this.authService.create(dto);
     }
 
