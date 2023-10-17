@@ -41,13 +41,63 @@ export class DatosService {
 
   constructor(private http: HttpClient) { }
 
+  //LISTAS
   registerUser(userData: NuevoUsuarioDto): Observable<any> {
     return this.http.post<any>(`${this.urlBase}/auth/nuevo`, userData);
   }
 
-  // registerUser(userData: any): Observable<any> {
-  //   return this.http.post<any>(`${this.urlBase}/register`, userData);
+  login(usuario: NuevoUsuarioDto): Observable<any> {
+    return this.http.post<any>(`${this.urlBase}/auth/login`, usuario).pipe(
+      tap(response => {
+        // Comprobamos si el token existe en la respuesta del backend
+        if (response.token) {
+          // Guardamos el token en el almacenamiento local (localStorage)
+          const decodedToken = this.jwtHelper.decodeToken(response.token);
+          this.usuario.id = decodedToken.id;
+          this.usuario.email = decodedToken.correo;
+          localStorage.setItem('token', response.token);
+          localStorage.setItem(this.idEstudianteKey, decodedToken.id);
+          localStorage.setItem(this.roleKey, decodedToken.roles);
+        }
+      }),
+      catchError(() => {
+        this.consultaExitosa = false;
+        return of(null);
+      })
+    );
+  }
+
+  // setTokenAndRole(token: string, role: string): void {
+  //   localStorage.setItem(this.roleKey, role);
   // }
+
+  // login(email: string, password: string): Observable<any> {
+  //   return this.http.post<any>(`${this.urlBase}/login`, { email, password }).pipe(
+  //     tap(response => {
+  //       // Comprobamos si el token existe en la respuesta del backend
+  //       if (response.token) {
+  //         // Guardamos el token en el almacenamiento local (localStorage)
+  //         localStorage.setItem('token', response.token);
+
+  //         // Decodificamos el token y obtenemos la información del usuario (en este caso, el email e id_estudiante)
+  //         const decodedToken = this.jwtHelper.decodeToken(response.token);
+  //         this.usuario.email = decodedToken.email;
+  //         this.usuario.id = decodedToken.id; // Actualiza a id_estudiante
+  //         this.setIdEstudiante(response.id); // Almacena el ID del estudiante
+  //       } else {
+  //         this.usuario.email = response.email;
+  //       }
+  //       this.usuario.password = response.password;
+  //     }),
+  //     catchError(() => {
+  //       this.consultaExitosa = false;
+  //       return of(null);
+  //     })
+  //   );
+  // }
+
+
+  //NO LISTAS
 
   refreshToken(): Observable<any> {
     const currentToken = this.getToken();
@@ -84,38 +134,13 @@ export class DatosService {
     return token && !this.jwtHelper.isTokenExpired(token);
   }
 
-  registerUserWithGmail(email: string) {
-    // Llama al método de registro con Gmail del backend
-    return this.http.post<any>(`${this.urlBase}/registerWithGmail`, { email });
-  }
+  // registerUserWithGmail(email: string) {
+  //   // Llama al método de registro con Gmail del backend
+  //   return this.http.post<any>(`${this.urlBase}/registerWithGmail`, { email });
+  // }
 
   setUserData(userData: any) {
     this.userDataSubject.next(userData);
-  }
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.urlBase}/login`, { email, password }).pipe(
-      tap(response => {
-        // Comprobamos si el token existe en la respuesta del backend
-        if (response.token) {
-          // Guardamos el token en el almacenamiento local (localStorage)
-          localStorage.setItem('token', response.token);
-
-          // Decodificamos el token y obtenemos la información del usuario (en este caso, el email e id_estudiante)
-          const decodedToken = this.jwtHelper.decodeToken(response.token);
-          this.usuario.email = decodedToken.email;
-          this.usuario.id = decodedToken.id; // Actualiza a id_estudiante
-          this.setIdEstudiante(response.id); // Almacena el ID del estudiante
-        } else {
-          this.usuario.email = response.email;
-        }
-        this.usuario.password = response.password;
-      }),
-      catchError(() => {
-        this.consultaExitosa = false;
-        return of(null);
-      })
-    );
   }
 
   setIdEstudiante(id: string) {
@@ -261,7 +286,7 @@ export class DatosService {
       })
     );
   }
-  
+
   recuperarSolicitudes(idEstudiante: string): Observable<any> {
     // Obtén el token del almacenamiento local (localStorage)
     const currentToken = this.getToken();
