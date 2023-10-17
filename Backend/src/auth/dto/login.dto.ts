@@ -1,14 +1,12 @@
+import { IsNotEmpty } from "class-validator";
 import { IsNotBlank } from "src/decorators/is-not-blank.decorator";
 
-export class LoginUsuarioDto{
+export class LoginUsuarioDto {
 
+    @IsNotBlank()
+    correo: string;
 
-@IsNotBlank({message: 'El nombre de usuario no debe estar vacio'})
-nombreUsuario: string;
-
-correo:string;
-
-@IsNotBlank({message: 'La contraseña del usuario no puede estar vacia'})
-password: string;
+    @IsNotEmpty({ message: 'La contraseña del usuario no puede estar vacia' })
+    password: string;
 
 }
