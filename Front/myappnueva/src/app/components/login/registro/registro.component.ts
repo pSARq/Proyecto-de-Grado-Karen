@@ -4,6 +4,7 @@ import { FirestoreserviceService } from 'src/app/services/servicefirestore/fires
 import { UserService } from 'src/app/services/user.service';
 import { EmailVerificationService } from 'src/app/services/email-verification.service';
 import { NuevoUsuarioDto } from 'src/app/models/NuevoUsuarioDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -12,28 +13,27 @@ import { NuevoUsuarioDto } from 'src/app/models/NuevoUsuarioDto';
   providers: [EmailVerificationService]
 })
 export class RegistroComponent implements OnInit {
-  selectUser = "";
-  Filtro = ""
 
   usuario: NuevoUsuarioDto = new NuevoUsuarioDto;
 
-  constructor(private user: UserService, private datos: DatosService) { }
+  constructor(private user: UserService,
+    private datos: DatosService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void { }
 
-  registroGmail() {
+  async registroGmail() {
     const { correo, password } = this.usuario;
 
-    return this.user.register(correo, password)
-      .then(user => {
-        console.log('Usuario registrado:', user);
-        // Puedes agregar más lógica aquí después de registrar al usuario
-        return user; // Devuelve el usuario registrado
-      })
-      .catch(error => {
-        console.error('Error al registrar el usuario:', error);
-        throw error; // Rechaza la promesa si hay un error
-      });
+    try {
+      const user = await this.user.register(correo, password);
+      console.log('Usuario registrado:', user);
+      return user;
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+      throw error; // Rechaza la promesa si hay un error
+    }
   }
 
   registroMysql() {
@@ -41,6 +41,7 @@ export class RegistroComponent implements OnInit {
     this.datos.registerUser(this.usuario)
       .subscribe(
         (response: any) => {
+          this.router.navigate(['/login'])
           // El registro fue exitoso, puedes mostrar un mensaje de éxito o redirigir al usuario a la página de inicio de sesión
           console.log('Registro exitoso:', response);
         },
@@ -56,7 +57,7 @@ export class RegistroComponent implements OnInit {
       const user = await this.registroGmail();
       if (user) {
         console.log('Usuario registrado correctamente en Gmail. Realizando registro en MySQL...');
-        await this.registroMysql(); // Llama a registroMysql si el usuario se registró correctamente en Gmail
+        this.registroMysql(); // Llama a registroMysql si el usuario se registró correctamente en Gmail
       } else {
         console.log('No se pudo registrar el usuario en Gmail.');
       }
